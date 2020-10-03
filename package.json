@@ -1,0 +1,25 @@
+{
+  "name": "caeser-cipher",
+  "version": "1.0.0",
+  "description": "Caesar cipher CLI tool",
+  "main": "caesar_cipher_cli.js",
+  "scripts": {
+    "test": "caesar_cipher_cli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kastrubait/caesar-cipher.git"
+  },
+  "keywords": [
+    "caeser-cipher"
+  ],
+  "author": "Tatsiana Kastrubai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kastrubait/caesar-cipher/issues"
+  },
+  "homepage": "https://github.com/kastrubait/caesar-cipher#readme",
+  "dependencies": {
+    "yargs": "^13.2.4"
+  }
+}
