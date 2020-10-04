@@ -2,7 +2,6 @@ const fs = require('fs');
 const error = require('./errorMessage');
 
 const pathValidation = (inputPath, outputPath) => {
-    console.log(inputPath, outputPath);
   try {
     fs.accessSync(inputPath, fs.constants.F_OK);
     fs.accessSync(inputPath, fs.constants.R_OK);
@@ -20,10 +19,10 @@ const pathValidation = (inputPath, outputPath) => {
     fs.accessSync(outputPath, fs.constants.W_OK);
   } catch (err) {
     if (err.code === 'ENOENT') {
-      errorHandler(53, 'option \'-o, --output <string>\' output file is not exist');
+      error(53, 'option \'-o, --output <string>\' output file is not exist');
     }
     if (err.code === 'EPERM') {
-      errorHandler(54, 'option \'-o, --output <string>\' onput file is not writable');
+      error(54, 'option \'-o, --output <string>\' onput file is not writable');
     }
   }
 };
