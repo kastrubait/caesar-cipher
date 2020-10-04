@@ -1,6 +1,6 @@
-const errorHandler = (code, message) => {
+const errorMessage = (code, message) => {
     process.exitCode = code;
     throw new Error(`error: ${message}`);
   };
   
-  module.exports = errorHandler;
+  module.exports = errorMessage;
