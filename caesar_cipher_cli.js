@@ -1,12 +1,39 @@
-const yargs = require("yargs");
+const { program } = require('commander');
+const fs = require('fs');
+
 const caesar = require("./modules/caesarCipher");
+const argumentValid = require('./modules/argumentValidation');
+const pathValid = require('./modules/pathValidation');
 
-const options = yargs
- .usage("Usage: -a <encoder/decoder> -i <input file> -o <output file> -s <shift> ")
- .option("s", { alias: "shift", describe: "Shift", type: "number", demandOption: true })
- .option("i", { alias: "input", describe: "input file", type: "string", demandOption: false })
- .option("o", { alias: "output", describe: "output file", type: "string", demandOption: false })
- .option("a", { alias: "action", describe: "action encode/decode", type: "string", demandOption: true })
- .argv;
+process.on('exit', (code) => {
+    console.log(`Process exited with code ${code}`);
+  });
+  
+program
+  .storeOptionsAsProperties(false)
+  .passCommandToAction(false)
+  .version('0.0.1');
 
-console.log(caesar.transformMessage(`12eFg УivC`, options.action, options.shift));
+program
+  .requiredOption('-a, --action <string>', 'action (encode/decode), require')
+  .requiredOption('-s, --shift <number>', 'shift, require')
+  .option('-i, --input <string>', 'input file')
+  .option('-o, --output <string>', 'output file')
+  .parse(process.argv);
+
+  const init = ({ shift, action, input, output }) => {
+    try {
+      const inputPath = input ? path.join(__dirname, input) : null;
+      const outputPath = output ? path.join(__dirname, output) : null;
+  
+      argumentValid (action, shift);
+      pathValid (inputPath, outputPath);
+
+      console.log(caesar.transformMessage(`12eFg УivC`, action, shift));
+
+    } catch (err) {
+        console.error(err.message);
+    }
+  };
+
+init(program.opts());

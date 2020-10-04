@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/kastrubait/caesar-cipher#readme",
   "dependencies": {
-    "yargs": "^13.2.4"
+    "commander": "^6.1.0",
+    "yargs": "^13.3.2"
   }
 }
