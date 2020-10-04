@@ -1,39 +1,46 @@
-const { program } = require('commander');
 const fs = require('fs');
+const path = require('path');
+const { program } = require('commander');
+const { pipeline } = require('stream');
 
-const caesar = require("./modules/caesarCipher");
-const argumentValid = require('./modules/argumentValidation');
-const pathValid = require('./modules/pathValidation');
+const argumentValid = require('./src/argumentValidation');
+const pathValid = require('./src/pathValidation');
+const TransformStream = require('./src/transformStream');
+const cryptStr = require("./src/caesarCipher");
 
-process.on('exit', (code) => {
-    console.log(`Process exited with code ${code}`);
-  });
-  
 program
   .storeOptionsAsProperties(false)
-  .passCommandToAction(false)
-  .version('0.0.1');
-
-program
   .requiredOption('-a, --action <string>', 'action (encode/decode), require')
   .requiredOption('-s, --shift <number>', 'shift, require')
   .option('-i, --input <string>', 'input file')
   .option('-o, --output <string>', 'output file')
   .parse(process.argv);
 
-  const init = ({ shift, action, input, output }) => {
-    try {
-      const inputPath = input ? path.join(__dirname, input) : null;
-      const outputPath = output ? path.join(__dirname, output) : null;
-  
-      argumentValid (action, shift);
-      pathValid (inputPath, outputPath);
+const init = ({ shift, action, input, output }) => {
+  try {
+    const inPath = input ? path.join('./', input) : null;
+    const outPath = output ? path.join('./', output) : null;
 
-      console.log(caesar.transformMessage(`12eFg УivC`, action, shift));
+    argumentValid (action, shift);
+    pathValid (inPath, outPath);
 
-    } catch (err) {
-        console.error(err.message);
-    }
-  };
+    const myReadable = input
+      ? fs.createReadStream(inPath)
+      : process.stdin;
+
+    const transformer = new TransformStream({ cryptStr, action, shift });
+
+    const myWriteble = output 
+      ? fs.createWriteStream(outPath, { flags: 'a' })
+      : process.stdout;
+    
+    pipeline(myReadable, transformer, myWriteble, (err) => {
+      if (err) console.error(err.message);
+    });
+
+  } catch (err) {
+    console.error(err.message);
+  }
+};
 
 init(program.opts());

@@ -17,6 +17,6 @@ const transformMessage = (message, action, shift) => {
   return result.join('');
 }
 
-const criptFn = (message, action, shift) => transformMessage(message, action, shift);
+const cryptStr = (message, action, shift) => transformMessage(message, action, shift);
 
-module.exports = criptFn;
+module.exports = cryptStr;
