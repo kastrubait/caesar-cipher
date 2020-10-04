@@ -6,7 +6,7 @@ const pathValidation = (inPath, outPath) => {
     fs.accessSync(inPath, fs.constants.F_OK);
   } catch (err) {
     if (err.code === 'ENOENT') {
-      error(51, 'option \'-i, --input <string>\' input file is not exist');
+      error(3, 'option \'-i, --input <string>\' input file is not exist');
     } 
   }
 
@@ -14,7 +14,7 @@ const pathValidation = (inPath, outPath) => {
     fs.accessSync(outPath, fs.constants.F_OK);
   } catch (err) {
     if (err.code === 'ENOENT') {
-      error(53, 'option \'-o, --output <string>\' output file is not exist');
+      error(3, 'option \'-o, --output <string>\' output file is not exist');
     }
   }
 };
