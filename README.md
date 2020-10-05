@@ -29,4 +29,4 @@
  > If all arguments are passed, the application reads from the file and writes the encrypted / decrypted text to the file
  
  #### Exit  
- > Finish work with **Сaesar-cipher** - **Сtrl+C** or **Ctrl+D"
+ > Finish work with **Сaesar-cipher** - **Сtrl+C** or **Ctrl+D**
