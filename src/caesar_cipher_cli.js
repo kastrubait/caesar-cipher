@@ -1,12 +1,14 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
 const path = require('path');
 const { program } = require('commander');
 const { pipeline } = require('stream');
 
-const argumentValid = require('./src/argumentValidation');
-const pathValid = require('./src/pathValidation');
-const TransformStream = require('./src/transformStream');
-const cryptStr = require("./src/caesarCipher");
+const argumentValid = require('./argumentValidation');
+const pathValid = require('./pathValidation');
+const TransformStream = require('./transformStream');
+const cryptStr = require("./caesarCipher");
 
 program
   .storeOptionsAsProperties(false)
