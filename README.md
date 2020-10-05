@@ -26,7 +26,7 @@
  > `> caesar_cipher_cli --action encode --shift 7 --input "C:\Work\plain.txt" --output "C:\Work\encoded.txt"`   
  > `> caesar_cipher_cli --action decode --output plain.txt -shift 7` 
  
- > If all arguments are passed, the application reads from the file and writes the encrypted / decrypted text to the file
+ > If all arguments are passed, the application reads from the file and writes the encrypted / decrypted text to the fileю The files must be created before starting work. By default you can use input.txt and output.txt located in **Сaesar-cipher**.
  
  #### Exit  
  > Finish work with **Сaesar-cipher** - **Сtrl+C** or **Ctrl+D**
