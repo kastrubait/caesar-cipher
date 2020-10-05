@@ -37,7 +37,10 @@ const init = ({ shift, action, input, output }) => {
       : process.stdout;
     
     pipeline(myReadable, transformer, myWriteble, (err) => {
-      if (err) console.error(err.message);
+      if (err) {
+        console.error(err.message);
+        process.exit(3);
+      }
     });
 
   } catch (err) {
